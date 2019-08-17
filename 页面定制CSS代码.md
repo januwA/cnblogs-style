@@ -1,0 +1,208 @@
+```css
+:root {
+  --primary-color: #ff4081;
+  --secondary-color: #448aff;
+}
+* {
+  font-family: 'Fira Code', Hack, Consolas !important;
+}
+
+html,
+body {
+  overflow-x: hidden;
+}
+
+::selection {
+  background: #ffe1007d;
+  cursor: help;
+}
+
+li {
+  list-style: none;
+}
+
+em {
+  background-color: yellow;
+}
+
+a {
+  color: var(--secondary-color);
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline !important;
+}
+
+#main {
+  margin-top: 5rem;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+#blogTitle {
+padding-left: 10px;
+}
+
+.postTitle {
+  font-size: 1.5rem;
+  margin-top: 2rem;
+}
+
+.entrylist .postSeparator {
+  margin-top: 2rem;
+}
+
+.postTitle:first-child {
+margin-top: inherit;
+}
+
+#navigator .blogStats,
+#div_digg,
+#sideBar,
+#comment_form,
+#green_channel, .dayTitle
+ {
+  display: none;
+}
+
+#navList {
+  display: flex;
+  margin: 0px;
+  padding: 0px;
+}
+
+#cb_post_title_url,
+#Header1_HeaderTitle,
+h1,
+h2 {
+  color: var(--primary-color);
+}
+
+#navList a {
+  float: left;
+  border-right: #ccc 1px dashed;
+  padding: 0 10px 0 10px;
+}
+
+#home {
+  width: 80vw;
+  margin: 0px auto;
+}
+
+#cnblogs_post_body li + li {
+  margin-top: 0.25em;
+}
+
+div.pager,
+div#nav_next_page {
+  background: #ffffff63;
+}
+
+/* img 的点击放大缩小*/
+.selected-img {
+  transform: scale(1.3, 1.3);
+}
+
+/*img的box-shadow*/
+p > img {
+  transition: transform 300ms cubic-bezier(0.35, 1.62, 1, 1.17);
+  display: block;
+  max-width: 400px;
+  margin: 0 auto;
+  box-shadow: 0px 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0px 8px 10px 1px rgba(0, 0, 0, 0.14), 0px 3px 14px 2px rgba(0, 0, 0, 0.12);
+}
+
+
+.c_b_p_desc {
+  color: #ff4081 !important;
+}
+
+.postDesc {
+  color: #7d7373b5 !important;
+}
+
+.cnblogs-markdown code,
+.cnblogs-post-body code {
+  font-family: 'Fira Code', 'Courier New', sans-serif !important;
+  background-color: #ffffff00 !important;
+  border: none !important;
+  font-weight: bold;
+  background-color: rgba(255, 255, 255, 0.7);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
+    0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
+    white-space: pre;
+}
+
+.cnblogs-markdown .hljs,
+.cnblogs-post-body .hljs {
+  font-family: 'Fira Code', 'Consolas', 'Courier New', sans-serif !important;
+  font-size: 14px !important;
+  line-height: 1.5 !important;
+  padding: 1em !important;
+}
+
+.postBody blockquote {
+  border: none;
+  border-left: 2px solid var(--primary-color) !important;
+  border-radius: 4px 0 0 4px;
+  background-color: #f0f0f0;
+  margin: .5em 0;
+}
+
+#header {
+  margin-top: 10rem;
+}
+
+#ajanuw-deluge {
+  position: fixed;
+  right: 20px;
+  bottom: 0;
+  z-index: 1201;
+  background-color: var(--primary-color);
+  border-radius: 4px 4px 0 0;
+  box-shadow: 0 16px 60px 0 rgba(86, 91, 115, 0.2);
+  font-family: Akzidenz, sans-serif;
+  font-size: 14px;
+  line-height: 24px;
+  transition: width 0.3s;
+  color: #fff;
+  opacity: 0.5;
+  transform: translate(103px, 27px) rotate(35deg);
+  transition: all 400ms cubic-bezier(0.26, 0.6, 0.4, 1.54);
+}
+#ajanuw-deluge:hover {
+  opacity: 1;
+  transform: translate(0, 0) rotate(0deg);
+}
+.ajanuw-deluge__header {
+  height: 44px;
+  line-height: 44px;
+  padding: 0 1rem;
+  text-align: center;
+  user-select: none;
+}
+.ajanuw-deluge__vote {
+  display: flex;
+  background-color: rgb(255, 255, 255);
+  justify-content: space-evenly;
+}
+.ajanuw-deluge__vote a {
+  cursor: pointer !important;
+  font-weight: 700 !important;
+  text-transform: uppercase !important;
+  padding: 1rem !important;
+  color: var(--primary-color) !important;
+  text-decoration: none !important;
+}
+
+.ajanuw-subtitle {
+    font-weight: 400;
+    font-size: 1rem;
+    line-height: 1.75;
+    letter-spacing: 0.00938em;
+    margin-top: 0px;
+    margin-bottom: 4px;
+    text-indent: 1rem;
+}
+```
