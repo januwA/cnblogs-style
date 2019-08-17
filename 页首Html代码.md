@@ -17,7 +17,7 @@
         p.circles = [];
         p.img;
         p.spots = [];
-        p.imgPath = 'https://i.loli.net/2018/09/05/5b8fce8bbe8b5.jpg';
+        p.imgPath = "https://i.loli.net/2018/09/05/5b8fce8bbe8b5.jpg";
         p._w = 600;
         p._pgColor = p.color(255, 255, 255);
         p.w;
@@ -25,17 +25,15 @@
 
         p.preload = () => {
           p.img = p.loadImage(p.imgPath);
-          p.img.resize(100, 100);
         };
 
         p.setup = () => {
-          p.w = p.min(p._w, p.windowWidth);
-          p.h = p.w / 1.5;
-          let canvas = p.createCanvas(p.w, p.h);
-          canvas.style('position', 'fixed');
-          canvas.style('left', '0');
-          canvas.style('top', '0');
-          canvas.style('z-index', '-1');
+          p._w = p.img.width;
+          let canvas = p.createCanvas(p.min(p._w, p.windowWidth), p.img.height);
+          canvas.style("position", "fixed");
+          canvas.style("left", "0");
+          canvas.style("top", "0");
+          canvas.style("z-index", "-1");
           p.pixelDensity(1);
           p.img.loadPixels();
 
@@ -53,9 +51,10 @@
 
         p.windowResized = () => {
           let nw = p.min(p._w, p.windowWidth);
-          let nh = nw / 1.5;
+          let nh = p.img.height * p.map(p._w - p.width, 0, p._w, 1, 0);
           p.resizeCanvas(nw, nh);
-          p.background(p._pgColor);
+          p.background(p._bgColor);
+          p.loop();
         };
 
         p.draw = () => {
