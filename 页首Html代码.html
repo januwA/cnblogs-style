@@ -1,0 +1,335 @@
+<!-- 代码高亮 -->
+<link
+  href="https://cdn.bootcss.com/highlight.js/9.12.0/styles/atom-one-light.min.css"
+  rel="stylesheet"
+/>
+<!-- fira_code字体 -->
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/firacode@1.205.0/distr/fira_code.css"
+/>
+
+<link
+  rel="stylesheet"
+  href="https://unpkg.com/prismjs@1.15.0/themes/prism-tomorrow.css"
+/>
+<script src="https://unpkg.com/prismjs@1.15.0/prism.js"></script>
+
+<!-- p5.js库 -->
+<script src="https://unpkg.com/p5@0.7.2/lib/p5.min.js"></script>
+<script src="https://unpkg.com/p5@0.7.2/lib/addons/p5.dom.min.js"></script>
+
+<script>
+  // canvas: title
+  new p5(p => {
+    p.spots = []; // 储存白色像素的坐标
+    p.circles = []; // 从spots中随机找出一个坐标，渲染一个circle
+    p._w; // 原始宽度，这个值永远不会被改变
+    p._h;
+    p._bgColor = p.color(255, 255, 255);
+    p.myText = document.querySelector("#cb_post_title_url").innerHTML;
+    p.myTextLen = p.myText.length;
+    p.myTextSize = 40;
+
+    p.setup = () => {
+      p.textSize(p.myTextSize);
+      p.textStyle(p.BOLD);
+      p.textFont("Fira Code");
+
+      let arr = p.myText.split("").map(e => {
+        return {
+          text: e,
+          w: p.textWidth(e),
+          h: p.textLeading(e)
+        };
+      });
+
+      let obj = arr.reduce(
+        (acc, e) => {
+          acc.w += e.w;
+          acc.text += e.text;
+          if (acc.w >= p.windowWidth - 40) {
+            acc.text += "\r\n";
+            acc.rt += 1;
+            acc.w = 0;
+          }
+          return acc;
+        },
+        { text: "", w: 0, rt: 1 }
+      );
+      p.myText = obj.text;
+
+      p._w = p.windowWidth;
+      p._h = p.textLeading(p.myText) * obj.rt;
+      let canvas = p.createCanvas(p._w, p._h);
+      canvas.style("z-index", "-1");
+      canvas.elt.title = document.querySelector("#cb_post_title_url").innerHTML;
+      canvas.parent("cb_post_title_url");
+      p.pixelDensity(1);
+      p.background(0);
+      p.textAlign(p.LEFT, p.CENTER);
+      p.fill(255);
+      p.text(p.myText, 0, p.height / 2);
+      p.loadPixels();
+
+      for (let x = 0; x < p.width; x++) {
+        for (let y = 0; y < p.height; y++) {
+          let index = (x + y * p.width) * 4;
+          let indexp = p.pixels[index];
+          if (indexp) {
+            let c = p.color(indexp);
+            let b = p.brightness(c);
+            if (b > 90) {
+              p.spots.push(p.createVector(x, y));
+            }
+          }
+        }
+      }
+      document.querySelector("#cb_post_title_url").firstChild.remove();
+    };
+
+    p.windowResized = () => {
+      let scale = p.map(p._w - p.width, 0, p._w, 1, 0);
+      let nh = p._h * scale;
+      p.resizeCanvas(p.windowWidth, nh);
+      p.background(p._bgColor);
+    };
+
+    p.draw = () => {
+      p.background(p._bgColor);
+      p.scale(p.map(p._w - p.width, 0, p._w, 1, 0));
+      for (let i = 0; i < 10; i++) {
+        let newC = newCircle();
+        if (newC !== null) {
+          p.circles.push(newC);
+        }
+      }
+      for (let c of p.circles) {
+        if (c.growing) {
+          if (c.edges()) {
+            c.growing = false;
+          } else {
+            for (let other of p.circles) {
+              if (c === other) continue;
+              let d = p.dist(c.x, c.y, other.x, other.y);
+              if (d - 2 < c.r + other.r) {
+                c.growing = false;
+                break;
+              }
+            }
+          }
+        }
+        c.run();
+      }
+      if (p.circles.length > p.myTextLen * 400) {
+        p.noLoop();
+      }
+    };
+
+    function newCircle() {
+      if (p.spots.length === 0) return null;
+      let r = p.int(p.random(0, p.spots.length));
+      let spot = p.spots[r];
+      let { x, y } = spot;
+
+      let valid = true;
+      for (let c of p.circles) {
+        let d = p.dist(x, y, c.x, c.y);
+        if (d < c.r) {
+          valid = false;
+          break;
+        }
+      }
+
+      if (valid) {
+        let strokeC = p.color(p.random(255), p.random(255), p.random(255));
+        return new Circle(x, y, 0, strokeC);
+      } else {
+        return null;
+      }
+    }
+
+    class Circle {
+      static rSpeed = 0.5;
+      static maxR = 1;
+      constructor(x, y, r, strokeColor = 255) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.strokeColor = strokeColor;
+
+        this.growing = true;
+      }
+
+      run() {
+        this.grow();
+        this.show();
+      }
+
+      show() {
+        p.noFill();
+        p.strokeWeight(2);
+        p.stroke(this.strokeColor);
+        p.ellipse(this.x, this.y, this.r * 2);
+      }
+
+      grow() {
+        if (this.growing) {
+          this.r += Circle.rSpeed;
+        }
+      }
+
+      edges() {
+        return (
+          this.x + this.r > p.width ||
+          this.x - this.r < 0 ||
+          this.y + this.r > p.height ||
+          this.y - this.r < 0 ||
+          this.r > Circle.maxR
+        );
+      }
+    }
+  });
+</script>
+<script>
+  // canvas: image
+  new p5(p => {
+    p.circles = [];
+    p.img;
+    p.spots = [];
+    p.imgPath = "https://i.loli.net/2018/09/05/5b8fce8bbe8b5.jpg";
+    p._pgColor = p.color(255, 255, 255);
+    p.preload = () => {
+      p.img = p.loadImage(p.imgPath);
+    };
+
+    p.setup = () => {
+      let canvas = p.createCanvas(
+        p.min(p.img.width, p.windowWidth),
+        p.img.height
+      );
+      canvas.style("position", "fixed");
+      canvas.style("left", "0");
+      canvas.style("top", "0");
+      canvas.style("z-index", "-1");
+      p.pixelDensity(1);
+      p.img.loadPixels();
+
+      for (let x = 0; x < p.img.width; x++) {
+        for (let y = 0; y < p.img.height; y++) {
+          let index = (x + y * p.img.width) * 4;
+          let c = p.img.pixels[index];
+          let b = p.brightness(p.color(c));
+          if (b > 10) {
+            p.spots.push(p.createVector(x, y));
+          }
+        }
+      }
+    };
+
+    p.windowResized = () => {
+      let imgw = p.img.width;
+      let nw = p.min(imgw, p.windowWidth);
+      let nh = p.img.height * p.map(imgw - p.width, 0, imgw, 1, 0);
+      p.resizeCanvas(nw, nh);
+      p.background(p._bgColor);
+      p.loop();
+    };
+
+    p.draw = () => {
+      p.background(p._pgColor);
+      let imgw = p.img.width;
+      p.scale(p.map(imgw - p.width, 0, imgw, 1, 0));
+      for (let i = 0; i < 5; i++) {
+        let newC = newCircle();
+        if (newC !== null) {
+          p.circles.push(newC);
+        }
+      }
+      for (let c of p.circles) {
+        if (c.growing) {
+          if (c.edges()) {
+            c.growing = false;
+          } else {
+            for (let other of p.circles) {
+              if (c === other) continue;
+              let d = p.dist(c.x, c.y, other.x, other.y);
+              if (d - 2 < c.r + other.r) {
+                c.growing = false;
+                break;
+              }
+            }
+          }
+        }
+        c.run();
+      }
+
+      if (p.circles.length > 800) {
+        p.noLoop();
+      }
+    };
+
+    function newCircle() {
+      let r = p.int(p.random(0, p.spots.length));
+      let spot = p.spots[r];
+      let x = spot.x;
+      let y = spot.y;
+
+      let valid = true;
+      for (let c of p.circles) {
+        let d = p.dist(x, y, c.x, c.y);
+        if (d < c.r) {
+          valid = false;
+          break;
+        }
+      }
+
+      if (valid) {
+        let strokeC = p.color(p.random(255), p.random(255), p.random(255));
+        return new Circle(x, y, 1, strokeC);
+      } else {
+        return null;
+      }
+    }
+
+    class Circle {
+      constructor(x, y, r, strokeColor = 255) {
+        this.x = x;
+        this.y = y;
+        this.r = r;
+        this.strokeColor = strokeColor;
+
+        this.growing = true;
+      }
+
+      run() {
+        this.grow();
+        this.show();
+      }
+
+      show() {
+        p.noFill();
+        p.strokeWeight(2);
+        p.stroke(this.strokeColor);
+        p.ellipse(this.x, this.y, this.r * 2);
+      }
+
+      grow() {
+        if (this.growing) {
+          this.r += 0.5;
+        }
+      }
+
+      edges() {
+        // this.r > 12 是后面填上去的
+        return (
+          this.x + this.r > p.width ||
+          this.x - this.r < 0 ||
+          this.y + this.r > p.height ||
+          this.y - this.r < 0 ||
+          this.r > 12
+        );
+      }
+    }
+  });
+</script>
