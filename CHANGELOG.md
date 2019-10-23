@@ -1,3 +1,8 @@
+## [0.3.0] - 2019-10-23
+
+* 删除: 使用canvas对title的重绘
+* 增加: add svg filter for title image
+
 ## [0.2.1] - 2019-9-23
 
 * 修改 `p > code` 样式

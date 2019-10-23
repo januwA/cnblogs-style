@@ -38,6 +38,16 @@ a:hover {
   line-height: 1.5;
 }
 
+#header-image-container {
+  position: relative;
+}
+#header-image-container svg {
+  position: absolute;
+}
+#ajanuw-title-image {
+  filter: url(#noise);
+}
+
 #blogTitle {
   padding-left: 10px;
 }
