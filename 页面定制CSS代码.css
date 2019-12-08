@@ -3,11 +3,12 @@
   --secondary-color: #448aff;
 }
 * {
-  font-family: 'Fira Code', Hack, Consolas !important;
+  font-family: "Fira Code", Hack, Consolas !important;
 }
 
 html,
 body {
+  margin: 0;
   overflow-x: hidden;
 }
 
@@ -39,7 +40,7 @@ a:hover {
 }
 
 #header-image-container {
- position: relative;
+  position: relative;
 }
 #header-image-container svg {
   position: absolute;
@@ -127,7 +128,7 @@ p > img {
 
 .cnblogs-markdown code[class],
 .cnblogs-post-body code[class] {
-  font-family: 'Fira Code', 'Courier New', sans-serif !important;
+  font-family: "Fira Code", "Courier New", sans-serif !important;
   background-color: #ffffff00 !important;
   border: none !important;
   font-weight: bold;
@@ -138,7 +139,7 @@ p > img {
 
 .cnblogs-markdown code,
 .cnblogs-post-body code {
-  font-family: 'Fira Code', 'Courier New', sans-serif !important;
+  font-family: "Fira Code", "Courier New", sans-serif !important;
   background-color: #f0f0f0 !important;
   border: none !important;
   margin: 1px 3px;
@@ -147,7 +148,7 @@ p > img {
 
 .cnblogs-markdown .hljs,
 .cnblogs-post-body .hljs {
-  font-family: 'Fira Code', 'Consolas', 'Courier New', sans-serif !important;
+  font-family: "Fira Code", "Consolas", "Courier New", sans-serif !important;
   font-size: 14px !important;
   line-height: 1.5 !important;
   padding: 1em !important;

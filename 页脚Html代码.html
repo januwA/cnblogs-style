@@ -1,91 +1,85 @@
 <script src="https://unpkg.com/ajanuw-preview-select.js@0.1.1/dist/preview-select.js"></script>
 <script>
-{
-const { PreviewSelect } = previewSelect;
-new PreviewSelect({
-  select: "img"
-}).to({
-  "transform": "scale(1.4)"
-});;
-}
+  {
+    const { PreviewSelect } = previewSelect;
+    new PreviewSelect({
+      select: "img"
+    }).to({
+      transform: "scale(1.4)"
+    });
+  }
 </script>
 
-
-
 <section id="ajanuw-deluge" style="display: none">
-      <div class="ajanuw-deluge__header">此页面是否对您有帮助？</div>
-      <div class="ajanuw-deluge__vote">
-        <a
-          id="ajanuw-deluge__vote-up"
-          title="👍🎉🎉🎉"
-          >yes</a
-        >
-        <a
-          href="https://msg.cnblogs.com/send?recipient=Ajanuw"
-target="_blank"
-          id="ajanuw-deluge__vote-down"
-          title="帮助我改进此页面。"
-          >no</a
-        >
-      </div>
-    </section>
+  <div class="ajanuw-deluge__header">此页面是否对您有帮助？</div>
+  <div class="ajanuw-deluge__vote">
+    <a id="ajanuw-deluge__vote-up" title="👍🎉🎉🎉">yes</a>
+    <a
+      href="https://msg.cnblogs.com/send?recipient=Ajanuw"
+      target="_blank"
+      id="ajanuw-deluge__vote-down"
+      title="帮助我改进此页面。"
+      >no</a
+    >
+  </div>
+</section>
 <script>
   (() => {
     setTimeout(() => {
       // 页面右下角提示
-      if (document.location.pathname.startsWith('/ajanuw/p')) {
-        document.querySelector('#ajanuw-deluge').style.display = 'block';
- 
-document
-          .querySelector('#ajanuw-deluge__vote-up')
-          .addEventListener('click', () => {
-              document.querySelector('#div_digg .diggit').click();
+      if (document.location.pathname.startsWith("/ajanuw/p")) {
+        document.querySelector("#ajanuw-deluge").style.display = "block";
+
+        document
+          .querySelector("#ajanuw-deluge__vote-up")
+          .addEventListener("click", () => {
+            document.querySelector("#div_digg .diggit").click();
           });
       }
     }, 2000);
   })();
 </script>
 
-  <!-- 夜间主题 -->
-  <script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.0/lib/darkmode-js.min.js"></script>
-  <script>
-    {
-      var options = {
-        bottom: '64px', // default: '32px'
-        right: 'unset', // default: '32px'
-        left: '32px', // default: 'unset'
-        time: '0.5s', // default: '0.3s'
-        mixColor: '#fff', // default: '#fff'
-        backgroundColor: '#fff', // default: '#fff'
-        buttonColorDark: '#100f2c', // default: '#100f2c'
-        buttonColorLight: '#fff', // default: '#fff'
-        saveInCookies: true, // default: true,
-        label: '🌓', // default: ''
-        autoMatchOsTheme: true, // default: true
-      };
+<!-- 夜间主题 -->
+<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.0/lib/darkmode-js.min.js"></script>
+<script>
+  {
+    var options = {
+      bottom: "64px", // default: '32px'
+      right: "unset", // default: '32px'
+      left: "32px", // default: 'unset'
+      time: "0.5s", // default: '0.3s'
+      mixColor: "#fff", // default: '#fff'
+      backgroundColor: "#fff", // default: '#fff'
+      buttonColorDark: "#100f2c", // default: '#100f2c'
+      buttonColorLight: "#fff", // default: '#fff'
+      saveInCookies: true, // default: true,
+      label: "🌓", // default: ''
+      autoMatchOsTheme: true // default: true
+    };
 
-      const darkmode = new Darkmode(options);
-      darkmode.showWidget();
-    }
-  </script>
+    const darkmode = new Darkmode(options);
+    darkmode.showWidget();
+  }
+</script>
 
 <!-- 动画库 -->
- <script src="https://unpkg.com/gsap@2.1.3/umd/TweenMax.js"></script>
-    <script>
-{
-      let el = document.getElementById('turbulence');
-      let tl = new TimelineMax({paused: true});
-      tl.from('#ajanuw-title-image', 3, {opacity: 0, x: -50, y: -50}, 0);
-      tl.to(
-        el,
-3,
-        {
-          attr: {
-            baseFrequency: '0 0',
-          },
-        },
-0
-      );
-      tl.play();
-}
-    </script>
+<script src="https://unpkg.com/gsap@2.1.3/umd/TweenMax.js"></script>
+<script>
+  {
+    let el = document.getElementById("turbulence");
+    let tl = new TimelineMax({ paused: true });
+    tl.from("#ajanuw-title-image", 3, { opacity: 0, x: -50, y: -50 }, 0);
+    tl.to(
+      el,
+      3,
+      {
+        attr: {
+          baseFrequency: "0 0"
+        }
+      },
+      0
+    );
+    tl.play();
+  }
+</script>
