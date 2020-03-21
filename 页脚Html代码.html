@@ -26,3 +26,26 @@
     }, 2000);
   })();
 </script>
+
+<div id="progressbar"></div>
+<div id="scrollPath"></div>
+<script>
+  {
+    const progress = document.querySelector("#progressbar");
+
+    // body整个高度 - 窗口可视高度
+    let totalHeight = document.body.scrollHeight - window.innerHeight;
+
+    window.addEventListener("scroll", update);
+    window.addEventListener("resize", () => {
+      totalHeight = document.body.scrollHeight - window.innerHeight;
+      update();
+    });
+
+    function update() {
+      // 滚动距离 / totalHeight * 100
+      const progressHeight = (window.pageYOffset / totalHeight) * 100;
+      progress.style.width = progressHeight + "%";
+    }
+  }
+</script>

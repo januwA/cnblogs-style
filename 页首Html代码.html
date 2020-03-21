@@ -49,6 +49,7 @@
     };
 
     p.windowResized = () => {
+      if(!p.img) return;
       let imgw = p.img.width;
       let nw = p.min(imgw, p.windowWidth);
       let nh = p.img.height * p.map(imgw - p.width, 0, imgw, 1, 0);

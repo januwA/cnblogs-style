@@ -1,7 +1,9 @@
 :root {
   --primary-color: #ff4081;
   --secondary-color: #448aff;
+  --progressbar-size: 3px;
 }
+
 * {
   font-family: "Fira Code", Hack, Consolas !important;
 }
@@ -10,6 +12,7 @@ html,
 body {
   margin: 0;
   overflow-x: hidden;
+  position: relative;
 }
 
 ::selection {
@@ -216,4 +219,77 @@ p > img {
   margin-top: 0px;
   margin-bottom: 4px;
   text-indent: 1rem;
+}
+
+#scrollPath {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--progressbar-size);
+  background: rgba(255, 255, 255, 0.05);
+}
+#progressbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: var(--progressbar-size);
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  animation: animate 5s linear infinite;
+}
+#progressbar::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--progressbar-size);
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  filter: blur(10px);
+}
+#progressbar::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: var(--progressbar-size);
+  background: linear-gradient(to top, #008aff, #00ffe7);
+  filter: blur(30px);
+}
+@-moz-keyframes animate {
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(360deg);
+  }
+}
+@-webkit-keyframes animate {
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(360deg);
+  }
+}
+@-o-keyframes animate {
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(360deg);
+  }
+}
+@keyframes animate {
+  0%,
+  100% {
+    filter: hue-rotate(0deg);
+  }
+  50% {
+    filter: hue-rotate(360deg);
+  }
 }
