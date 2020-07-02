@@ -1,4 +1,4 @@
-<section id="ajanuw-deluge" style="display: none">
+<section id="ajanuw-deluge" style="display: none;">
   <div class="ajanuw-deluge__header">此页面是否对您有帮助？</div>
   <div class="ajanuw-deluge__vote">
     <a id="ajanuw-deluge__vote-up" title="👍🎉🎉🎉">yes</a>
@@ -32,7 +32,6 @@
 <script>
   {
     const progress = document.querySelector("#progressbar");
-
     // body整个高度 - 窗口可视高度
     let totalHeight = document.body.scrollHeight - window.innerHeight;
 
@@ -48,4 +47,13 @@
       progress.style.width = progressHeight + "%";
     }
   }
+</script>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/highlight.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/languages/x86asm.min.js"></script>
+<script>
+  hljs.registerAliases("asm", { languageName: "x86asm" });
+  hljs.registerAliases("ts", { languageName: "typescript" });
+  hljs.registerAliases("sh", { languageName: "shell" });
+  hljs.initHighlighting();
 </script>

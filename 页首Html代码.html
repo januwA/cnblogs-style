@@ -1,8 +1,7 @@
 <!-- 代码高亮 -->
-<link
-  href="https://unpkg.com/highlight.js@latest/styles/atom-one-light.css"
-  rel="stylesheet"
-/>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/atom-one-light.min.css" rel="stylesheet" />
+
+
 <!-- fira_code字体 -->
 <link
   rel="stylesheet"
@@ -31,7 +30,7 @@
       );
       canvas.style('position', 'absolute');
       canvas.style('left', '0');
-      canvas.style('top', '0');
+      canvas.style('top', '-10rem');
       canvas.style('z-index', '-1');
       p.pixelDensity(1);
       p.img.loadPixels();
@@ -189,26 +188,4 @@
     tl.play();
   }
 </script>
-
-<!-- 夜间主题 -->
-<script src="https://cdn.jsdelivr.net/npm/darkmode-js@1.5.0/lib/darkmode-js.min.js"></script>
-<script>
-  {
-    var options = {
-      bottom: "64px", // default: '32px'
-      right: "unset", // default: '32px'
-      left: "32px", // default: 'unset'
-      time: "0.5s", // default: '0.3s'
-      mixColor: "#fff", // default: '#fff'
-      backgroundColor: "#fff", // default: '#fff'
-      buttonColorDark: "#100f2c", // default: '#100f2c'
-      buttonColorLight: "#fff", // default: '#fff'
-      saveInCookies: true, // default: true,
-      label: "🌓", // default: ''
-      autoMatchOsTheme: true // default: true
-    };
-
-    const darkmode = new Darkmode(options);
-    darkmode.showWidget();
-  }
 </script>
