@@ -57,3 +57,32 @@
   hljs.registerAliases("sh", { languageName: "shell" });
   hljs.initHighlighting();
 </script>
+
+<!-- 打赏 -->
+<section id="qrcodes">
+  <figure>
+    <img
+      src="https://i.loli.net/2020/11/03/bRI9XgPuUkqrvos.png"
+      alt="微信打赏"
+    />
+    <figcaption>微信打赏</figcaption>
+  </figure>
+  <figure>
+    <img
+      src="https://i.loli.net/2020/11/03/TmlBLzAOasZ94GE.png"
+      alt="支付宝打赏"
+    />
+    <figcaption>支付宝打赏</figcaption>
+  </figure>
+  <figure>
+    <img src="https://i.loli.net/2020/11/03/uLlfsYBgH45P72C.png" alt="Paypal" />
+    <figcaption>Paypal</figcaption>
+  </figure>
+</section>
+
+<script>
+  const parent = document.querySelector("#cnblogs_post_body");
+  const data = document.querySelector("#qrcodes");
+  if (parent) parent.append(data);
+  else data.remove();
+</script>

@@ -1,6 +1,20 @@
-<!-- 代码高亮 -->
-<link href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/atom-one-light.min.css" rel="stylesheet" />
+<svg>
+  <filter id="noise">
+    <feTurbulence
+      baseFrequency="0.02 0.05"
+      result="NOISE"
+      numOctaves="1"
+      id="turbulence"
+    />
+    <feDisplacementMap in="SourceGraphic" in2="NOISE" scale="20" />
+  </filter>
+</svg>
 
+<!-- 代码高亮 -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.1.1/styles/atom-one-light.min.css"
+  rel="stylesheet"
+/>
 
 <!-- fira_code字体 -->
 <link
@@ -9,15 +23,15 @@
 />
 
 <!-- p5.js库 -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js" ></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.10.2/p5.min.js"></script>
 
 <script>
   // canvas: image
-  new p5(p => {
+  new p5((p) => {
     p.circles = [];
     p.img;
     p.spots = [];
-    p.imgPath = 'https://i.loli.net/2019/08/17/6WGClBhUoswvyd9.jpg';
+    p.imgPath = "https://i.loli.net/2019/08/17/6WGClBhUoswvyd9.jpg";
     p._pgColor = p.color(255, 255, 255);
     p.preload = () => {
       p.img = p.loadImage(p.imgPath);
@@ -26,12 +40,12 @@
     p.setup = () => {
       let canvas = p.createCanvas(
         p.min(p.img.width, p.windowWidth),
-        p.img.height,
+        p.img.height
       );
-      canvas.style('position', 'absolute');
-      canvas.style('left', '0');
-      canvas.style('top', '-10rem');
-      canvas.style('z-index', '-1');
+      canvas.style("position", "absolute");
+      canvas.style("left", "0");
+      canvas.style("top", "0");
+      canvas.style("z-index", "-1");
       p.pixelDensity(1);
       p.img.loadPixels();
 
@@ -48,7 +62,7 @@
     };
 
     p.windowResized = () => {
-      if(!p.img) return;
+      if (!p.img) return;
       let imgw = p.img.width;
       let nw = p.min(imgw, p.windowWidth);
       let nh = p.img.height * p.map(imgw - p.width, 0, imgw, 1, 0);
@@ -155,37 +169,33 @@
   });
 </script>
 
-
 <script src="https://unpkg.com/ajanuw-preview-select.js@0.1.1/dist/preview-select.js"></script>
 <script>
   // 放大预览库
-    const { PreviewSelect } = window.previewSelect;
-    new PreviewSelect({
-      select: "img"
-    }).to({
-      transform: "scale(1.4)"
-    });
+  const { PreviewSelect } = window.previewSelect;
+  new PreviewSelect({
+    select: "img",
+  }).to({
+    transform: "scale(1.4)",
+  });
 </script>
 
 <!-- 动画库 -->
 <script src="https://unpkg.com/gsap@2.1.3/umd/TweenMax.js"></script>
 <script>
- // 标题图片
-  {
-    let el = document.getElementById("turbulence");
-    let tl = new TimelineMax({ paused: true });
-    tl.from("#ajanuw-title-image", 3, { opacity: 0, x: -50, y: -50 }, 0);
-    tl.to(
-      el,
-      3,
-      {
-        attr: {
-          baseFrequency: "0 0"
-        }
+  // 标题图片
+  let turbulence = document.getElementById("turbulence");
+  let tl = new TimelineMax({ paused: true });
+  tl.from("#ajanuw-title-image", 3, { opacity: 0, x: -50, y: -50 }, 0);
+  tl.to(
+    turbulence,
+    3,
+    {
+      attr: {
+        baseFrequency: "0 0",
       },
-      0
-    );
-    tl.play();
-  }
-</script>
+    },
+    0
+  );
+  tl.play();
 </script>
