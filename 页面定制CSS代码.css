@@ -55,7 +55,8 @@ em {
   margin-bottom: 1rem;
 }
 
-#top_nav {
+#top_nav,
+#bannerbar {
   display: none;
 }
 
@@ -167,6 +168,12 @@ p > img {
   border: none !important;
   margin: 1px 3px;
   display: initial;
+}
+
+.cnblogs-markdown pre code,
+.cnblogs-post-body pre code {
+  padding: 1em !important;
+  font-size: 14px !important;
 }
 
 .cnblogs-markdown .hljs,
